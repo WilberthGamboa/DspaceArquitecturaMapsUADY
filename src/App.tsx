@@ -1,9 +1,11 @@
 import './index.css'
-import GoogleMapReact from 'google-map-react';
 import { useGetQueryString } from './maps/hooks/useGetQueryString';
 import { useGeolocated } from "react-geolocated";
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 function App() {
-  const {coordinates} = useGetQueryString()
+  const {coordinates,metadata,search} = useGetQueryString()
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
   useGeolocated({
       positionOptions: {
@@ -15,22 +17,27 @@ function App() {
    console.log(isGeolocationAvailable)
    console.log(isGeolocationEnabled)
  console.log({coordinates})
-/*
-const apiKey = 'AIzaSyDal8gWT9yatkSmST52fylAj0QGtf51tD4'; // Replace with your Google Maps API key
-    const url = `https://www.google.com/maps/embed/v1/directions?key=${apiKey}
-    const url = `https://www.google.com/maps/embed/v1/directions?key=${apiKey}&origin=${this.latitudCliente},${this.longitudCliente}&destination=${latitud},${longitud}&avoid=tolls|highways`;
-    */
   return (
     <>
-      <h1  className="text-3xl font-bold underline">HOLA </h1>
-     
-      <iframe
-          width="100%"
-          height="400"
-          src={`https://www.google.com/maps/embed/v1/directions?key=${import.meta.env.VITE_APIMAPS}&origin=${coords?.latitude},${coords?.longitude}&destination=${coordinates.latitude},${coordinates.longitude}&avoid=tolls|highways`}
-         
-          allowFullScreen
-        ></iframe>
+      <div className='container '>
+      <h1 className="text-5xl font-extrabold text-gray-800 mx-auto w-3/4 text-center m-3">{search}</h1>
+
+      <div className=' mx-auto w-3/4 h-auto p-2 card'>
+      <iframe 
+         width="100%"
+         height="600px"
+         src={`https://www.google.com/maps/embed/v1/directions?key=${import.meta.env.VITE_APIMAPS}&origin=${coords?.latitude},${coords?.longitude}&destination=${coordinates.latitude},${coordinates.longitude}&avoid=tolls|highways`}
+         allowFullScreen
+       ></iframe>
+      </div>
+      </div>
+      <div className="card w-3/4 mx-auto">
+            <DataTable value={metadata} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="key" header="Categoría"></Column>
+                <Column field="value" header="Valor" style={{}}></Column> 
+            </DataTable>
+        </div>
+
     </>
   )
 }

@@ -2,15 +2,19 @@ import axios from "axios";
 import queryString from "query-string";
 import { useEffect, useState } from "react"
 import { Coordinates } from "../interface/coordinates.interface";
+import { Metadata } from "../interface/metadata.interface";
 
 export const useGetQueryString = () =>{
     const [coordinates, setCoordinates] = useState<Coordinates>({
         latitude:undefined,
         longitude:undefined
     })
+    const [metadata, setMetadata] = useState<Metadata[]>()
+    const [search, setsearch] = useState('')
     useEffect(() => {
         const parsed:any = queryString.parse(location.search);
         console.log(parsed);
+        setsearch(parsed.lugar)
         fetchDataRepository(parsed.lugar)
     }, [ ])
 
@@ -39,6 +43,8 @@ const fetchDataRepository = async (nombreItem:string) => {
                 const data = response.data
                 let latitud;
                 let longitud
+                
+                console.log(data)
                 for (const iterator of data) {
                     
                     if (iterator.key==='arq.Latitud') {
@@ -53,6 +59,8 @@ const fetchDataRepository = async (nombreItem:string) => {
                     latitude:latitud,
                     longitude:longitud
                 })
+
+                setMetadata(data)
             }
 
         }
@@ -61,6 +69,8 @@ const fetchDataRepository = async (nombreItem:string) => {
       }
 }
     return{
-        coordinates
+        coordinates,
+        metadata,
+        search
     }
 }
