@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#root > div > div:nth-child(4) > div > div > table > tbody td{
+    word-break: break-word; /* Rompe la palabra en caracteres individuales si es necesario */
+    white-space: normal; /* Permitir saltos de línea según sea necesario */
+}
+#root > div > div.card.mx-auto.w-3\/4.h-auto.p-2{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#root > div > div.card.mx-auto.w-3\/4.h-auto.p-2 > iframe{
+    /*Tamaño del mapa*/
+    height:25vw;
+    width: 100%;
+}
+
+#root > div > div:nth-child(4) > div > div > table td{
+    /*Bordes de la celdas*/
+    border: 0.5px solid #002E5F;
+}
+
+
+
+
+
+/* Estilos específicos para pantallas con un ancho máximo de 768px */
+@media (max-width: 768px) {
+
+    #root > div > div.card.mx-auto.w-3\/4.h-auto.p-2 > iframe{
+        height: 55vw;
+        margin:auto;
+        padding: 0%;
+    }
+    
+  }
