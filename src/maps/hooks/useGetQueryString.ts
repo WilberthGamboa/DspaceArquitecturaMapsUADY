@@ -55,12 +55,21 @@ const fetchDataRepository = async (nombreItem:string) => {
                     }
                    
                 }
+                const filteredData = data.filter((dataActual:Metadata) =>{
+                   return dataActual.schema!="dc"
+                }).map((dataActual:Metadata)=>{
+                        dataActual.key = dataActual.key.slice(4,1000)
+                        return dataActual
+                })
+                console.log({filteredData})
+
+
                 setCoordinates({
                     latitude:latitud,
                     longitude:longitud
                 })
 
-                setMetadata(data)
+                setMetadata(filteredData)
             }
 
         }

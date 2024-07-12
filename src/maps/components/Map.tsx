@@ -2,6 +2,7 @@ import { Coordinates } from "../interface/coordinates.interface"
 
 
 export const Map: React.FC<{coordsOrigin:Coordinates,coordsDestination:Coordinates}> = ({coordsOrigin,coordsDestination}) => {
+  console.log({coordsOrigin})
   return (
     <div className='card mx-auto w-3/4 h-auto p-2 '>
     <iframe 
