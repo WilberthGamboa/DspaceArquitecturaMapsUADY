@@ -1,5 +1,5 @@
 window.onload = function() {
-    const element = document.querySelector('.p-datatable-wrapper');
+    const element:any = document.querySelector('.p-datatable-wrapper');
 
     if (element) {
         
@@ -8,7 +8,7 @@ window.onload = function() {
         console.error('Elemento no encontrado');
     }
 
-    const tableElement = document.querySelector('.p-datatable-table');
+    const tableElement:any = document.querySelector('.p-datatable-table');
 
     if (tableElement) {
         tableElement.style.minWidth = ''; // Elimina la propiedad min-width
